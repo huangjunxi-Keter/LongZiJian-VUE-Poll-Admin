@@ -28,11 +28,11 @@
             <el-button type="primary" icon="Plus" @click="openDailog()">新增</el-button>
         </el-row>
         <!-- 表格 -->
-        <el-table v-loading="other.isloading" :data="userArry" stripe @expand-change="loadOrderItems">
+        <el-table v-loading="other.isloading" :data="userArry" stripe>
             <el-table-column prop="avatar" label="头像" #default="{ row }">
                 <el-avatar :src="getImageUrl(row.avatar)" />
             </el-table-column>
-            <el-table-column prop="email" label="邮箱"></el-table-column>
+            <el-table-column prop="email" label="邮箱" />
             <el-table-column prop="nickname" label="昵称" />
             <el-table-column prop="password" label="密码" />
             <el-table-column prop="type" label="类型" :formatter="getTypeStr" />
@@ -52,7 +52,7 @@
                 :current-page="pagination.currentPage" @update:current-page="changePage" />
         </div>
     </el-card>
-    <el-dialog v-model="dialog.dialogVisible" :title="dialog.title" destroy-on-close>
+    <el-dialog v-model="dialog.dialogVisible" :title="dialog.title" align-center destroy-on-close>
         <user-edit :user="dialog.editUser" />
     </el-dialog>
 </template>
@@ -66,7 +66,7 @@ import { getUsersCount, getUsers, updateUser } from '@/api/user';
 import UserEdit from "@/components/UserEdit.vue";
 
 export default {
-    name: 'OrderList',
+    name: 'UserList',
     components: {
         "user-edit": UserEdit
     },
@@ -116,6 +116,8 @@ export default {
                 if (scope) {
                     data.dialog.editUser = scope.row;
                     data.dialog.title = "编辑";
+                } else {
+                    data.dialog.editUser = null;
                 }
                 data.dialog.dialogVisible = true;
             },
@@ -129,6 +131,10 @@ export default {
                 }
                 else
                     ElMessage.error(!state ? "启用失败" : "停用失败");
+            },
+            changePage(currentPage) {
+                data.pagination.currentPage = currentPage;
+                eventCallBacks.searchFormSubmit(doms.searchForm.value);
             }
         }
 

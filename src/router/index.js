@@ -12,7 +12,7 @@ const userRoute = {
     {
       name: "userList",
       path: "list",
-      component: () => import("@/views/userList"),
+      component: () => import("@/views/UserList"),
       meta: {
         icon: "List",
         title: "用户管理",
@@ -33,7 +33,7 @@ const activityRoute = {
     {
       name: "activityList",
       path: "list",
-      component: () => import("@/views/activityList"),
+      component: () => import("@/views/ActivityList"),
       meta: {
         icon: "List",
         title: "活动管理",
@@ -54,31 +54,10 @@ const activityItemRoute = {
     {
       name: "activityItemList",
       path: "list",
-      component: () => import("@/views/activityItemList"),
+      component: () => import("@/views/ActivityItemList"),
       meta: {
         icon: "List",
         title: "项目管理",
-      },
-    },
-  ],
-};
-
-const pollLogRoute = {
-  name: "pollLog",
-  path: "poll-log",
-  component: () => import("@/layouts/BasicLayout"),
-  meta: {
-    icon: "Histogram",
-    title: "投票记录",
-  },
-  children: [
-    {
-      name: "pollLogList",
-      path: "list",
-      component: () => import("@/views/pollLogList"),
-      meta: {
-        icon: "List",
-        title: "投票记录",
       },
     },
   ],
@@ -106,7 +85,6 @@ export default createRouter({
         userRoute, 
         activityRoute,
         activityItemRoute,
-        pollLogRoute
       ],
     },
   ],

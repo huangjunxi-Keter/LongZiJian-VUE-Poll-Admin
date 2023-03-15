@@ -75,7 +75,7 @@ export default {
                 email: null,
                 nickname: null,
                 password: null,
-                avatar: null,
+                avatar: '.png',
                 state: null,
                 type: null,
                 id: null
@@ -88,14 +88,15 @@ export default {
                 type: [{ required: true, message: "请选择用户类型" }],
             },
             uploadData: {
-                fileList: [],
+                fileList: [
+                    { url: getImageUrl(".png") }
+                ],
                 fileOther: {
-                    oldFileName: '',
+                    oldFileName: '.png',
                     path: '/img/user/'
                 }
             },
             other: {
-                updateEmail: false,
                 isLoading: false
             }
         });
@@ -165,7 +166,7 @@ export default {
                     data.userFormData[key] = props.user[key];
                 });
                 data.uploadData.fileOther.oldFileName = props.user.avatar;
-                data.uploadData.fileList.push({ url: getImageUrl(props.user.avatar) });
+                data.uploadData.fileList[0].url = getImageUrl(props.user.avatar);
             }
         });
 
